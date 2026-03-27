@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASIC FULL NXT — O Futuro do Fitness Premium em Goiânia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --accent: #c9a96e;
+            --accent-light: #e0c992;
+            --accent-dim: rgba(201, 169, 110, 0.15);
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #e0c992 50%, #c9a96e 100%);
+            --gradient-dark: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+            --shadow-glow: 0 0 40px rgba(201, 169, 110, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── SLIDE BASE ─── */
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(201,169,110,0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* ─── TYPOGRAPHY ─── */
+        .slide-number {
+            position: absolute;
+            top: 40px; right: 60px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 3px;
+            opacity: 0.6;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 700px;
+        }
+
+        .gold-text {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--accent-dim);
+            border: 1px solid rgba(201,169,110,0.2);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* ─── GRID LAYOUTS ─── */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        /* ─── CARDS ─── */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: rgba(201,169,110,0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .card .price {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .card-highlight {
+            border-color: rgba(201,169,110,0.3);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(201,169,110,0.05) 100%);
+        }
+
+        /* ─── STATS ─── */
+        .stat {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .stat .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ─── BRAND REFS ─── */
+        .brand-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .brand-pill {
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ─── TABLE ─── */
+        .tier-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 32px;
+            font-size: 0.9rem;
+        }
+
+        .tier-table th {
+            text-align: left;
+            padding: 14px 20px;
+            background: rgba(201,169,110,0.1);
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .tier-table th:first-child { border-radius: 12px 0 0 0; }
+        .tier-table th:last-child { border-radius: 0 12px 0 0; }
+
+        .tier-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: var(--text-secondary);
+        }
+
+        .tier-table tr:hover td {
+            background: rgba(201,169,110,0.03);
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline {
+            margin-top: 40px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .timeline-item {
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px; top: 6px;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(201,169,110,0.4);
+        }
+
+        .timeline-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            margin-bottom: 6px;
+        }
+
+        .timeline-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ─── HERO SLIDE ─── */
+        .hero-slide {
+            text-align: center;
+            align-items: center;
+        }
+
+        .hero-slide h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            margin-bottom: 16px;
+        }
+
+        .hero-logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 40px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 24px auto;
+        }
+
+        /* ─── FOOTER NAV ─── */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(201,169,110,0.5);
+        }
+
+        /* ─── INSIGHT BOX ─── */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(201,169,110,0.08), rgba(201,169,110,0.02));
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 24px;
+        }
+
+        .insight-box .insight-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .insight-box p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .slide { padding: 40px; }
+            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .nav-dots { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 30px 20px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* ─── ANIMATIONS ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<div class="nav-dots" id="navDots"></div>
+
+<!-- ═══════════════════════════════════════════ SLIDE 1: COVER ═══════ -->
+<section class="slide hero-slide" id="slide-0">
+    <div class="hero-logo">BASIC FULL</div>
+    <h1 class="gold-text fade-in">NXT</h1>
+    <div class="divider"></div>
+    <p class="subtitle fade-in" style="text-align:center; margin: 0 auto;">
+        O Futuro do Fitness Premium em Goiânia<br>
+        <span style="font-size:0.9rem; color:var(--text-muted);">Tendências do mercado americano &bull; Insights estratégicos &bull; 2026</span>
+    </p>
+    <div class="slide-number">CONFIDENCIAL</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 2: MERCADO ═══════ -->
+<section class="slide" id="slide-1">
+    <span class="slide-number">01</span>
+    <span class="tag">Visão de Mercado</span>
+    <h2 class="fade-in">O mercado fitness global<br>está em <span class="gold-text">transformação acelerada</span></h2>
+    <p class="subtitle fade-in">A indústria evoluiu de "lugar pra malhar" para ecossistema de longevidade, performance e comunidade.</p>
+
+    <div class="grid-4 fade-in">
+        <div class="stat">
+            <div class="number">$179B</div>
+            <div class="label">Mercado Global 2030</div>
+        </div>
+        <div class="stat">
+            <div class="number">26%</div>
+            <div class="label">CAGR Smart Fitness</div>
+        </div>
+        <div class="stat">
+            <div class="number">$63B</div>
+            <div class="label">Biohacking 2028</div>
+        </div>
+        <div class="stat">
+            <div class="number">200%</div>
+            <div class="label">Crescimento Hybrid</div>
+        </div>
+    </div>
+
+    <div class="insight-box fade-in">
+        <div class="insight-label">Insight para Basic Full</div>
+        <p>O segmento premium é resiliente: a Life Time aumenta mensalidades em $10-30/mês sem perder clientes. O público alto padrão absorve reajustes e valoriza exclusividade. Goiânia tem demanda latente — ninguém oferece o conceito completo.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 3: CONCEITO NXT ═══════ -->
+<section class="slide" id="slide-2">
+    <span class="slide-number">02</span>
+    <span class="tag">O Conceito</span>
+    <h2 class="fade-in">Basic Full <span class="gold-text">NXT</span></h2>
+    <p class="subtitle fade-in">Não é só uma academia. É um hub de performance, recuperação e comunidade — inspirado nos melhores clubs do mundo.</p>
+
+    <div class="grid-3 fade-in">
+        <div class="card card-highlight">
+            <span class="icon">🏋️</span>
+            <h4>Performance Studio</h4>
+            <p>Equipamentos de elite, smart mirrors com IA, treino funcional, combat fitness e áreas outdoor.</p>
+        </div>
+        <div class="card card-highlight">
+            <span class="icon">🧊</span>
+            <h4>Recovery Lab</h4>
+            <p>Sauna infravermelha, ice bath de última geração, crioterapia, compressão pneumática e red light therapy.</p>
+        </div>
+        <div class="card card-highlight">
+            <span class="icon">🧬</span>
+            <h4>Longevity Lounge</h4>
+            <p>IV drip bar, body scanning (DEXA/InBody), biohacking protocols e coaching de longevidade.</p>
+        </div>
+    </div>
+
+    <div class="brand-row fade-in" style="margin-top: 32px; justify-content: center;">
+        <span class="brand-pill">Inspirado em</span>
+        <span class="brand-pill">Equinox</span>
+        <span class="brand-pill">Life Time</span>
+        <span class="brand-pill">HEIMAT</span>
+        <span class="brand-pill">Remedy Place</span>
+        <span class="brand-pill">TMPL Clubs</span>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 4: RECOVERY ═══════ -->
+<section class="slide" id="slide-3">
+    <span class="slide-number">03</span>
+    <span class="tag">Recovery & Wellness</span>
+    <h2 class="fade-in">O <span class="gold-text">Recovery Lab</span> é o<br>novo diferencial competitivo</h2>
+    <p class="subtitle fade-in">Academias premium nos EUA estão investindo mais em recuperação do que em equipamentos de musculação.</p>
+
+    <div class="grid-2 fade-in">
+        <div class="card">
+            <span class="icon">🧊</span>
+            <h4>Ice Bath de Luxo (Kohler x Remedy Place)</h4>
+            <p>Controle de temperatura 3°C–40°C, filtração UV, timer inteligente e meditação guiada via app. Referência: Kohler lançou modelo de US$20.500 em parceria com o Remedy Place.</p>
+            <div class="price">Investimento: $20–50k | Sessão: $50–100</div>
+        </div>
+        <div class="card">
+            <span class="icon">🔴</span>
+            <h4>Red Light Therapy + NormaTec</h4>
+            <p>Terapia de luz vermelha para recuperação celular + compressão pneumática para drenagem. Combinação padrão em clubes como TMPL e Restore Hyper Wellness (225+ unidades).</p>
+            <div class="price">Sessão combinada: $50–100 | ROI: alto (baixo custo operacional)</div>
+        </div>
+        <div class="card">
+            <span class="icon">❄️</span>
+            <h4>Crioterapia (Corpo Inteiro)</h4>
+            <p>Cabine a -110°C por 3 minutos. Reduz inflamação, aumenta metabolismo e libera endorfinas. Mercado cresceu 40% em 2024.</p>
+            <div class="price">Sessão: $100–300 | Equipamento: $50–100k</div>
+        </div>
+        <div class="card">
+            <span class="icon">🫧</span>
+            <h4>Câmara Hiperbárica (HBOT)</h4>
+            <p>Oxigenação profunda para recuperação acelerada e longevidade. Trend #1 entre biohackers e atletas de elite. Referência: Hypervida Club, The DRIPBaR.</p>
+            <div class="price">Sessão: $150–600 | Pacote 20 sessões: $2–10k</div>
+        </div>
+    </div>
+
+    <div class="insight-box fade-in">
+        <div class="insight-label">Insight para Basic Full</div>
+        <p>A Basic Full já tem sauna e ice bath — está à frente. A NXT pode evoluir para um Recovery Lab completo com contrast therapy (quente/frio alternado), crioterapia e NormaTec. O clima quente de Goiânia amplifica o apelo do cold plunge.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 5: TECH ═══════ -->
+<section class="slide" id="slide-4">
+    <span class="slide-number">04</span>
+    <span class="tag">Tecnologia & IA</span>
+    <h2 class="fade-in">Tecnologia que <span class="gold-text">transforma</span><br>a experiência do treino</h2>
+
+    <div class="grid-3 fade-in">
+        <div class="card">
+            <span class="icon">🪞</span>
+            <h4>Smart Mirrors com IA</h4>
+            <p>MAGIC AI e Tonal 2 corrigem postura em tempo real e adaptam treinos ao biométrico do aluno. Mercado de $372M → $745M até 2030.</p>
+            <div class="price">Investimento: $1–3k/espelho</div>
+        </div>
+        <div class="card">
+            <span class="icon">📊</span>
+            <h4>Body Scanning</h4>
+            <p>InBody para tracking mensal + DEXA para diagnóstico semestral. Estratégia combinada das melhores academias premium americanas.</p>
+            <div class="price">InBody: $5–15k | DEXA: $50k+</div>
+        </div>
+        <div class="card">
+            <span class="icon">⌚</span>
+            <h4>Integração Wearables</h4>
+            <p>Dashboard que conecta WHOOP 5.0, Garmin e Apple Watch. Treino adapta em tempo real baseado no HRV, sono e strain do aluno.</p>
+            <div class="price">Software: $2–5k/mês</div>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="margin-top: 24px;">
+        <div class="card">
+            <span class="icon">🧠</span>
+            <h4>IA como Personal Trainer</h4>
+            <p>50%+ das pessoas aceitam coaching por IA. Mercado de $9.8B (2024) → $46B (2034). Treinos adaptam automaticamente baseado em recuperação, sono e objetivos.</p>
+        </div>
+        <div class="card">
+            <span class="icon">📱</span>
+            <h4>App Proprietário NXT</h4>
+            <p>Check-in, agendamento, métricas corporais, histórico de treinos, controle de recovery sessions e comunidade — tudo em um app com a marca Basic Full.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 6: BIOHACKING ═══════ -->
+<section class="slide" id="slide-5">
+    <span class="slide-number">05</span>
+    <span class="tag">Biohacking & Longevidade</span>
+    <h2 class="fade-in">O segmento que mais cresce:<br><span class="gold-text">Longevity Clubs</span></h2>
+    <p class="subtitle fade-in">Academias de luxo nos EUA estão se transformando em clínicas de longevidade. Mercado de biohacking: $63 bilhões até 2028.</p>
+
+    <div class="grid-2 fade-in">
+        <div>
+            <div class="card" style="margin-bottom: 20px;">
+                <span class="icon">💉</span>
+                <h4>IV Drip Bar</h4>
+                <p>Infusão de vitaminas, NAD+, complexos anti-aging. Restore Hyper Wellness é franquia #1 nos EUA (225+ unidades). Receita média: $851k/ano por unidade.</p>
+                <div class="price">Sessão: R$300–600 | Setup: $30–50k</div>
+            </div>
+            <div class="card">
+                <span class="icon">🔬</span>
+                <h4>Protocolos de Longevidade</h4>
+                <p>Teste genético, painel hormonal, coaching nutricional personalizado. Equinox lançou parceria com Function Health. Life Time tem o programa MIORA.</p>
+            </div>
+        </div>
+        <div>
+            <div class="card" style="margin-bottom: 20px;">
+                <span class="icon">⚡</span>
+                <h4>Upgrade Labs (Dave Asprey)</h4>
+                <p>Primeira franquia de biohacking do mundo. Red light beds, AI bikes, vibrating plates, massage linfática. Promete resultados 10x mais rápidos. Franquia: $633k–1.16M.</p>
+            </div>
+            <div class="card">
+                <span class="icon">🏥</span>
+                <h4>Remedy Place Model</h4>
+                <p>"Social Wellness Club" — 50% dos membros são millennials homens. Ice bath + breathwork + sauna privada + HBOT + IV. Members gastam até $27k/ano.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="insight-box fade-in">
+        <div class="insight-label">Insight para Basic Full</div>
+        <p>Um "Longevity Corner" dentro da NXT com IV drips, body scanning e protocolos de otimização atrairia o público 35-55 anos de alto poder aquisitivo. É uma receita recorrente com margens altas que complementa perfeitamente o modelo de academia.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 7: EXPERIÊNCIA ═══════ -->
+<section class="slide" id="slide-6">
+    <span class="slide-number">06</span>
+    <span class="tag">Experiência & Design</span>
+    <h2 class="fade-in">Não é sobre equipamento.<br>É sobre <span class="gold-text">experiência.</span></h2>
+
+    <div class="grid-3 fade-in">
+        <div class="card">
+            <span class="icon">🌿</span>
+            <h4>Design Biofílico</h4>
+            <p>Plantas, madeira, pedra e luz natural. Pesquisas mostram que aumenta 51% a renovação de membros. O clima tropical de Goiânia permite designs que academias em NYC nunca poderiam ter.</p>
+        </div>
+        <div class="card">
+            <span class="icon">☕</span>
+            <h4>Café & Juice Bar</h4>
+            <p>HEIMAT (LA) tem restaurante aberto ao público dentro da academia. Smoothie bars premium e cafés artesanais criam um "terceiro lugar" — nem casa, nem trabalho.</p>
+        </div>
+        <div class="card">
+            <span class="icon">💻</span>
+            <h4>Coworking Hub</h4>
+            <p>Life Time Work é um negócio à parte. Espaços de trabalho dentro da academia para membros. Perfeito para Goiânia: cidade de empreendedores e remotos do agro/tech.</p>
+        </div>
+        <div class="card">
+            <span class="icon">🛁</span>
+            <h4>Vestiários de Luxo</h4>
+            <p>TMPL Clubs usa azulejo italiano, beauty bars com produtos premium e chuveiros high-end. O vestiário é tão importante quanto o salão de treino.</p>
+        </div>
+        <div class="card">
+            <span class="icon">🎭</span>
+            <h4>Eventos & Comunidade</h4>
+            <p>HEIMAT faz noites de cinema, book clubs, workshops e networking. A academia vira um club social. Membros ficam pela comunidade, não só pelo equipamento.</p>
+        </div>
+        <div class="card">
+            <span class="icon">👩</span>
+            <h4>Espaços Femininos</h4>
+            <p>Mercado de $5 bilhões com 7% de crescimento. 69% aumento em buscas por "women-only gym". 7/10 mulheres sentem intimidação em academias mistas.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 8: REFERÊNCIAS ═══════ -->
+<section class="slide" id="slide-7">
+    <span class="slide-number">07</span>
+    <span class="tag">Benchmarks Globais</span>
+    <h2 class="fade-in">As referências que definem<br>o <span class="gold-text">padrão mundial</span></h2>
+
+    <table class="tier-table fade-in">
+        <thead>
+            <tr>
+                <th>Club</th>
+                <th>Local</th>
+                <th>Mensalidade</th>
+                <th>Diferencial</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Equinox</strong></td>
+                <td>NYC, LA</td>
+                <td>$200–$500/mês</td>
+                <td>Marca aspiracional, personal premium, SoulCycle</td>
+            </tr>
+            <tr>
+                <td><strong>Life Time</strong></td>
+                <td>226 unidades</td>
+                <td>$179–$379/mês</td>
+                <td>Resort-style, spa, café, coworking, daycare</td>
+            </tr>
+            <tr>
+                <td><strong>HEIMAT</strong></td>
+                <td>Los Angeles</td>
+                <td>$350/mês + $300 taxa</td>
+                <td>75.000 sq ft, restaurante, rooftop pool, 6 studios</td>
+            </tr>
+            <tr>
+                <td><strong>Remedy Place</strong></td>
+                <td>NYC, LA</td>
+                <td>$255–$833/mês</td>
+                <td>Social wellness club, HBOT, ice bath, IV</td>
+            </tr>
+            <tr>
+                <td><strong>TMPL Clubs</strong></td>
+                <td>NYC</td>
+                <td>$175–$200/mês</td>
+                <td>Luxury recovery baths, Himalayan salt sauna, Pilates</td>
+            </tr>
+            <tr>
+                <td><strong>The Well</strong></td>
+                <td>NYC</td>
+                <td>All-inclusive</td>
+                <td>East-meets-West, meditation dome, health coach</td>
+            </tr>
+            <tr>
+                <td><strong>Restore Hyper Wellness</strong></td>
+                <td>225+ estúdios</td>
+                <td>À la carte</td>
+                <td>Franquia #1, cryo, IV, red light, contrast therapy</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="insight-box fade-in">
+        <div class="insight-label">Insight para Basic Full</div>
+        <p>O posicionamento ideal da NXT é entre TMPL ($175-200) e HEIMAT ($350). Em Goiânia, R$800–1.500/mês para o tier completo, com opção ultra-premium de R$2.500–5.000 incluindo longevity protocols.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 9: MODELO NEGÓCIO ═══════ -->
+<section class="slide" id="slide-8">
+    <span class="slide-number">08</span>
+    <span class="tag">Modelo de Negócio</span>
+    <h2 class="fade-in">Estrutura de <span class="gold-text">revenue streams</span><br>da Basic Full NXT</h2>
+
+    <div class="grid-2 fade-in">
+        <div>
+            <h3 style="margin-top: 20px;">Tiers de Membership</h3>
+            <table class="tier-table" style="margin-top: 16px;">
+                <thead>
+                    <tr><th>Tier</th><th>Valor</th><th>Inclui</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color: var(--text-primary);">NXT Core</strong></td>
+                        <td style="color: var(--accent);">R$800/mês</td>
+                        <td>Musculação + Funcional + 2 recovery/mês</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--text-primary);">NXT Full</strong></td>
+                        <td style="color: var(--accent);">R$1.500/mês</td>
+                        <td>Tudo + Recovery ilimitado + Body scan</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--text-primary);">NXT Elite</strong></td>
+                        <td style="color: var(--accent);">R$3.000/mês</td>
+                        <td>Tudo + Longevity protocols + IV + Coach dedicado</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--text-primary);">NXT Founder</strong></td>
+                        <td style="color: var(--accent);">R$5.000/mês</td>
+                        <td>Tudo + Acesso 24h + Eventos VIP + Concierge</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3 style="margin-top: 20px;">Revenue Streams Adicionais</h3>
+            <div class="card" style="margin-top: 16px; margin-bottom: 16px;">
+                <h4>Serviços À La Carte</h4>
+                <p>Crioterapia: R$250 | IV Drip: R$400 | HBOT: R$500 | Body Scan: R$200 | NormaTec: R$100</p>
+            </div>
+            <div class="card" style="margin-bottom: 16px;">
+                <h4>Café & Juice Bar</h4>
+                <p>Receita recorrente diária. Ticket médio: R$25-40. Aberto ao público como HEIMAT faz com o MOTHER TONGUE.</p>
+            </div>
+            <div class="card">
+                <h4>Corporate Wellness</h4>
+                <p>Pacotes corporativos para empresas de Goiânia. Agro, mineração, tech e saúde são verticais com budget de wellness.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 10: ROADMAP ═══════ -->
+<section class="slide" id="slide-9">
+    <span class="slide-number">09</span>
+    <span class="tag">Roadmap</span>
+    <h2 class="fade-in">Da visão à <span class="gold-text">execução</span></h2>
+    <p class="subtitle fade-in">Implementação progressiva em 3 fases para controlar investimento e validar demanda.</p>
+
+    <div class="grid-2 fade-in" style="margin-top: 40px;">
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Fase 1 — Quick Wins (0-3 meses)</h4>
+                <p>NormaTec + Red Light Therapy na unidade atual. InBody para body scanning. Juice bar premium. Validar demanda e preços.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Fase 2 — Recovery Lab (3-6 meses)</h4>
+                <p>Ice bath Kohler-grade. Crioterapia corpo inteiro. Contrast therapy. Smart mirrors em área funcional. App proprietário.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Fase 3 — NXT Launch (6-12 meses)</h4>
+                <p>Nova unidade com conceito completo: Recovery Lab + Longevity Lounge + Café + Coworking + Área outdoor. IV drip bar. HBOT.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Fase 4 — Expansão (12-24 meses)</h4>
+                <p>Programas corporate wellness. Eventos e community building. Parcerias com médicos e nutricionistas. Modelo pronto para replicar.</p>
+            </div>
+        </div>
+        <div>
+            <div class="card card-highlight" style="margin-bottom: 20px;">
+                <h4>Investimento Estimado</h4>
+                <table class="tier-table" style="margin-top: 12px; font-size: 0.85rem;">
+                    <tbody>
+                        <tr><td>Fase 1 (Quick Wins)</td><td style="color: var(--accent); text-align:right;">R$80–150k</td></tr>
+                        <tr><td>Fase 2 (Recovery Lab)</td><td style="color: var(--accent); text-align:right;">R$300–500k</td></tr>
+                        <tr><td>Fase 3 (Nova Unidade NXT)</td><td style="color: var(--accent); text-align:right;">R$1.5–3M</td></tr>
+                        <tr><td>Fase 4 (Expansão)</td><td style="color: var(--accent); text-align:right;">R$200–400k</td></tr>
+                        <tr style="border-top: 1px solid var(--accent);"><td><strong>Total estimado</strong></td><td style="color: var(--accent); text-align:right;"><strong>R$2–4M</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="insight-box">
+                <div class="insight-label">ROI esperado</div>
+                <p>Com 200 membros NXT Full (R$1.500) + 50 Elite (R$3.000) + serviços à la carte, a receita mensal projetada é de R$500k+. Payback estimado: 18-24 meses.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SLIDE 11: CLOSING ═══════ -->
+<section class="slide hero-slide" id="slide-10">
+    <span class="slide-number">10</span>
+    <div class="hero-logo" style="margin-bottom: 20px;">BASIC FULL</div>
+    <h1 class="gold-text fade-in" style="font-size: clamp(3rem, 6vw, 5rem);">NXT</h1>
+    <div class="divider"></div>
+    <p class="subtitle fade-in" style="text-align:center; margin: 0 auto; max-width: 600px;">
+        O fitness do futuro não é sobre mais equipamento.<br>
+        É sobre <strong style="color: var(--accent);">recuperação inteligente</strong>, <strong style="color: var(--accent);">tecnologia integrada</strong><br>e <strong style="color: var(--accent);">comunidade que transforma</strong>.
+    </p>
+    <div style="margin-top: 48px;" class="fade-in">
+        <p style="color: var(--text-muted); font-size: 0.85rem;">
+            Pesquisa e apresentação preparada por IA &bull; Dados do mercado americano 2025-2026<br>
+            <span style="color: var(--accent);">Basic Full &bull; Jardim Goiás &bull; Goiânia</span>
+        </p>
+    </div>
+</section>
+
+<script>
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in, .slide-in-left').forEach(el => observer.observe(el));
+
+    // Nav dots
+    const slides = document.querySelectorAll('.slide');
+    const navDots = document.getElementById('navDots');
+
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot';
+        dot.onclick = () => slides[i].scrollIntoView({ behavior: 'smooth' });
+        navDots.appendChild(dot);
+    });
+
+    // Active dot tracking
+    const dotObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const index = Array.from(slides).indexOf(entry.target);
+                document.querySelectorAll('.nav-dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === index);
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    slides.forEach(s => dotObserver.observe(s));
+</script>
+
+</body>
+</html>
