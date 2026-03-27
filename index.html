@@ -185,6 +185,62 @@
             font-weight: 500;
         }
 
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-img {
+            opacity: 1;
+        }
+
+        /* Image gallery section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item .gallery-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+        }
+
         .card-highlight {
             border-color: rgba(201,169,110,0.3);
             background: linear-gradient(135deg, var(--bg-card) 0%, rgba(201,169,110,0.05) 100%);
@@ -477,17 +533,17 @@
 
     <div class="grid-3 fade-in">
         <div class="card card-highlight">
-            <span class="icon">🏋️</span>
+            <img src="img/gym-luxury.jpg" alt="Performance Studio" class="card-img">
             <h4>Performance Studio</h4>
             <p>Equipamentos de elite, smart mirrors com IA, treino funcional, combat fitness e áreas outdoor.</p>
         </div>
         <div class="card card-highlight">
-            <span class="icon">🧊</span>
+            <img src="img/sauna.jpg" alt="Recovery Lab" class="card-img">
             <h4>Recovery Lab</h4>
             <p>Sauna infravermelha, ice bath de última geração, crioterapia, compressão pneumática e red light therapy.</p>
         </div>
         <div class="card card-highlight">
-            <span class="icon">🧬</span>
+            <img src="img/normatec.jpg" alt="Longevity Lounge" class="card-img">
             <h4>Longevity Lounge</h4>
             <p>IV drip bar, body scanning (DEXA/InBody), biohacking protocols e coaching de longevidade.</p>
         </div>
@@ -512,25 +568,25 @@
 
     <div class="grid-2 fade-in">
         <div class="card">
-            <span class="icon">🧊</span>
+            <img src="img/icebath.jpg" alt="Ice Bath de Luxo" class="card-img">
             <h4>Ice Bath de Luxo (Kohler x Remedy Place)</h4>
             <p>Controle de temperatura 3°C–40°C, filtração UV, timer inteligente e meditação guiada via app. Referência: Kohler lançou modelo de US$20.500 em parceria com o Remedy Place.</p>
             <div class="price">Investimento: $20–50k | Sessão: $50–100</div>
         </div>
         <div class="card">
-            <span class="icon">🔴</span>
+            <img src="img/redlight.jpg" alt="Red Light Therapy" class="card-img">
             <h4>Red Light Therapy + NormaTec</h4>
             <p>Terapia de luz vermelha para recuperação celular + compressão pneumática para drenagem. Combinação padrão em clubes como TMPL e Restore Hyper Wellness (225+ unidades).</p>
             <div class="price">Sessão combinada: $50–100 | ROI: alto (baixo custo operacional)</div>
         </div>
         <div class="card">
-            <span class="icon">❄️</span>
+            <img src="img/cryo.jpg" alt="Crioterapia" class="card-img">
             <h4>Crioterapia (Corpo Inteiro)</h4>
             <p>Cabine a -110°C por 3 minutos. Reduz inflamação, aumenta metabolismo e libera endorfinas. Mercado cresceu 40% em 2024.</p>
             <div class="price">Sessão: $100–300 | Equipamento: $50–100k</div>
         </div>
         <div class="card">
-            <span class="icon">🫧</span>
+            <img src="img/hbot.jpg" alt="Câmara Hiperbárica" class="card-img">
             <h4>Câmara Hiperbárica (HBOT)</h4>
             <p>Oxigenação profunda para recuperação acelerada e longevidade. Trend #1 entre biohackers e atletas de elite. Referência: Hypervida Club, The DRIPBaR.</p>
             <div class="price">Sessão: $150–600 | Pacote 20 sessões: $2–10k</div>
@@ -551,7 +607,7 @@
 
     <div class="grid-3 fade-in">
         <div class="card">
-            <span class="icon">🪞</span>
+            <img src="img/smart-gym.jpg" alt="Smart Mirror Gym" class="card-img">
             <h4>Smart Mirrors com IA</h4>
             <p>MAGIC AI e Tonal 2 corrigem postura em tempo real e adaptam treinos ao biométrico do aluno. Mercado de $372M → $745M até 2030.</p>
             <div class="price">Investimento: $1–3k/espelho</div>
@@ -594,7 +650,7 @@
     <div class="grid-2 fade-in">
         <div>
             <div class="card" style="margin-bottom: 20px;">
-                <span class="icon">💉</span>
+                <img src="img/iv-therapy.jpg" alt="IV Drip Bar" class="card-img">
                 <h4>IV Drip Bar</h4>
                 <p>Infusão de vitaminas, NAD+, complexos anti-aging. Restore Hyper Wellness é franquia #1 nos EUA (225+ unidades). Receita média: $851k/ano por unidade.</p>
                 <div class="price">Sessão: R$300–600 | Setup: $30–50k</div>
@@ -633,7 +689,7 @@
 
     <div class="grid-3 fade-in">
         <div class="card">
-            <span class="icon">🌿</span>
+            <img src="img/gym-design.jpg" alt="Design Biofílico" class="card-img">
             <h4>Design Biofílico</h4>
             <p>Plantas, madeira, pedra e luz natural. Pesquisas mostram que aumenta 51% a renovação de membros. O clima tropical de Goiânia permite designs que academias em NYC nunca poderiam ter.</p>
         </div>
@@ -648,7 +704,7 @@
             <p>Life Time Work é um negócio à parte. Espaços de trabalho dentro da academia para membros. Perfeito para Goiânia: cidade de empreendedores e remotos do agro/tech.</p>
         </div>
         <div class="card">
-            <span class="icon">🛁</span>
+            <img src="img/spa-lounge.jpg" alt="Vestiários de Luxo" class="card-img">
             <h4>Vestiários de Luxo</h4>
             <p>TMPL Clubs usa azulejo italiano, beauty bars com produtos premium e chuveiros high-end. O vestiário é tão importante quanto o salão de treino.</p>
         </div>
